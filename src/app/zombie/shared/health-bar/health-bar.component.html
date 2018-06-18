@@ -1,0 +1,9 @@
+<div class="health">
+  <ng-container *ngIf="healthPercents > 0; else loose">
+    <p class="health-value">{{healthValue}}</p>
+  </ng-container>
+  <ng-template #loose>
+    <p class="health-value health-value-end" (click)="restart()"> You Loose, Click to Try Again</p>
+  </ng-template>
+  <div class="health-bar" [style.width.%]="healthPercents"></div>
+</div>

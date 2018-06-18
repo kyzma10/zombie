@@ -1,0 +1,25 @@
+.health {
+  width: 100%;
+  height: 60px;
+  border: 1px solid black;
+  position: relative;
+  background: black;
+  box-sizing: border-box;
+  &-bar {
+    height: 100%;
+    background: red;
+    transition: width 0.5s;
+  }
+  &-value {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    font-size: 30px;
+    color: white;
+    margin: 0;
+    line-height: 60px;
+    &-end {
+      cursor: pointer;
+    }
+  }
+}

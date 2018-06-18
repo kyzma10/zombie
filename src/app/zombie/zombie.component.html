@@ -1,0 +1,8 @@
+<app-health-bar
+  [healthPercents]="healthPercents"
+  [healthValue]="healthValue"
+  (initClicker)="initGame()">
+</app-health-bar>
+<div [hidden]="healthPercents < 0" class="zombie-wrap">
+  <img #zombie class="zombie" src="./../../assets/zombie.jpg" alt="Zombie">
+</div>
