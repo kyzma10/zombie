@@ -25,6 +25,34 @@ export class ZombieComponent implements OnInit, OnDestroy {
   public initGame() {
     this.healthPercents = this.startPercents;
     this.healthValue = this.maxHealth;
+    const healtSpend = interval(1000);
+    const zombieClick = fromEvent(this.zombie.nativeElement, 'click');
+
+    merge(healtSpend, zombieClick)
+      .pipe(
+        debounce((v: any) => {
+          if(Number.isInteger(v)) {
+            return timer(500);
+          }
+          return timer(0);
+        }),
+        takeWhile(() => this.healthPercents !== 0),
+        takeUntil(this.until)
+  )
+      .subscribe((v: any) => {
+    if (Number.isInteger(v)) {
+      this.healthValue = this.healthValue - this.step;
+      this.healthPercents = this.healthValue * 100 / this.maxHealth;
+    } else {
+      if (this.healthValue + this.clickStep >= this.maxHealth) {
+        this.healthPercents = 100;
+        this.healthValue = this.maxHealth;
+      } else {
+        this.healthPercents = this.healthPercents + (this.clickStep * 100 / this.maxHealth);
+        this.healthValue = this.healthValue + this.clickStep;
+      }
+    }
+    });
   }
 
   public ngOnDestroy() {
